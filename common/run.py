@@ -31,7 +31,8 @@ def bootup():
 		'comics', 'mls', 'twoxchromosomes', 'politics', 'badhistory', '49ers', 'yugioh', 'mac', 'science',
 		'polticaldiscussion', 'photography,', 'srsgaming', 'europe', 'cringe', 'soccer', 'tatoos', 'wtf',
 		'buildapc', 'funny', 'nascar', 'conspiracy', 'gaming', 'fitness', 'iama', 'mensrights', 'adviceanimals',
-		'nottheonion'
+		'nottheonion', 'pics', 'okcupid', 'squaredcircle', 'makeupaddiction', 'trees', 'reactiongifs', 'india',
+		'askreddit', 'screenshots', 'askscience', 'sex'
 	]
 	
 	parse = argparse.ArgumentParser(description = 'LinkFixerBot')
@@ -83,6 +84,7 @@ def bootup():
 def loop(reddit, config, banned):
 	
 	cache = []
+	
 	print('\n> Booting up LFB. You will be notified when LFB detects a broken link.')
 	print('> To stop the bot, press Ctrl + C.')
 	
@@ -128,13 +130,13 @@ def post(comment, links, cache):
 	
 		text = '/' + c[1:] + ' '
 		
-		if c[1:] == 'r/' + comment.subreddit.display_name:
+		if c[1:].lower() == 'r/' + comment.subreddit.display_name.lower():
 		
 			denied_links += text
 		
 		else:
 			
-			fixed += '/' + c[1:] + ' '
+			fixed += text
 			
 	if fixed == '':
 		
