@@ -23,13 +23,15 @@ sub_regex = re.compile(' r/[A-Za-z0-9_]+')
 
 def bootup():
 	
-	version = "1.0"
+	version = "1.1"
 	
 	banned = [
 		'loans', 'nba', 'aww', 'subredditdrama', 'againstmensrights', 'australia', 'shitpoliticssays',
 		'scotch', 'metacanada', 'news', 'nfl', 'breakingbad', 'theredpill', 'whatisthisthing', 'conspiratard',
 		'comics', 'mls', 'twoxchromosomes', 'politics', 'badhistory', '49ers', 'yugioh', 'mac', 'science',
-		'polticaldiscussion', 'photography,', 'srsgaming', 'europe'
+		'polticaldiscussion', 'photography,', 'srsgaming', 'europe', 'cringe', 'soccer', 'tatoos', 'wtf',
+		'buildapc', 'funny', 'nascar', 'conspiracy', 'gaming', 'fitness', 'iama', 'mensrights', 'adviceanimals',
+		'nottheonion'
 	]
 	
 	parse = argparse.ArgumentParser(description = 'LinkFixerBot')
@@ -37,7 +39,7 @@ def bootup():
 	args = parse.parse_args()
 	
 	print('\nLFB // version ' + version)
-	print('--------------------')
+	print('------------------')
 	
 	if not os.path.isfile(config_name):
 		
@@ -81,7 +83,7 @@ def bootup():
 def loop(reddit, config, banned):
 	
 	cache = []
-	print('> Booting up LFB. You will be notified when LFB detects a broken link.')
+	print('\n> Booting up LFB. You will be notified when LFB detects a broken link.')
 	print('> To stop the bot, press Ctrl + C.')
 	
 	try:
@@ -96,14 +98,14 @@ def loop(reddit, config, banned):
 				
 				if cond and comment.subreddit.display_name.lower() not in banned and comment.id not in cache:
 					
-					print('> Valid comment found in the sub %s!' % comment.subreddit.display_name)
+					print('\n> Valid comment found in the sub /r/%s!' % comment.subreddit.display_name)
 					cache = post(comment, links, cache)
 					
 			time.sleep(15)
 			
 	except KeyboardInterrupt:
 		
-		print('> Stopped LFB. Thank you for running this bot!')
+		print('\n> Stopped LFB. Thank you for running this bot!')
 		
 def check(comment):
 	
@@ -126,7 +128,7 @@ def post(comment, links, cache):
 	
 		text = '/' + c[1:] + ' '
 		
-		if c[1:] == comment.subreddit.display_name.lower():
+		if c[1:] == 'r/' + comment.subreddit.display_name:
 		
 			denied_links += text
 		
@@ -146,15 +148,21 @@ def post(comment, links, cache):
 			'^This ^is ^an [^automated ^bot](http://github.com/WinneonSword/LFB)^. ^For ^reporting ^**problems**, ^contact ^/u/WinneonSword.'
 		)
 		
-	cache.append(comment.id)
-	comment.reply(reply)
-	
-	print('> Comment posted! Fixed links: %s' % fixed)
-	
-	if not denied_links == '':
-		
-		print('> Denied links: %s' % denied_links)
-		
+		try:
+			
+			comment.reply(reply)
+			cache.append(comment.id)
+			
+			print('> Comment posted! Fixed links: %s' % fixed)
+			
+			if not denied_links == '':
+				
+				print('> Denied links: %s' % denied_links)
+				
+		except:
+			
+			print('> Failed to post comment.')
+			
 	return cache
 	
 bootup()
