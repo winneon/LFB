@@ -1,7 +1,8 @@
-###################
-# LinkFixerBotSnr #
-# # #  By WS  # # #
-###################
+################
+# LinkFixerBot #
+#      By      #
+# WinneonSword #
+################
 
 import sys, os, re, time, argparse, getpass, praw, reddit, config
 
