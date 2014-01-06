@@ -1,6 +1,6 @@
 ################
 # LinkFixerBot #
-#      By      #
+# # #  By  # # #
 # WinneonSword #
 ################
 
