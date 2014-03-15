@@ -157,10 +157,10 @@ def loop(user, reddit, conf, banned):
 		
 		print('> Stopped LFB. Thank you for running this bot!')
 		
-	'''except:
+	except:
 		
 		print('\n> An error has occured. Restarting the bot.')
-		loop(reddit, config, banned)'''
+		loop(reddit, config, banned)
 		
 def check(comment):
 	
