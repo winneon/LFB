@@ -88,6 +88,8 @@ def loop(user, reddit, conf, banned):
 			inbox = None
 			inbox = reddit.get_unread(limit = None)
 			
+			print('\n> Checking mailbox for messages...')
+			
 			for message in inbox:
 				
 				try:
@@ -117,6 +119,7 @@ def loop(user, reddit, conf, banned):
 					
 				message.mark_as_read()
 				
+			print('\n> Checking comments for valid entries...')
 			comments = reddit.get_comments('all', limit = current['limit'])
 			
 			for comment in comments:
@@ -140,7 +143,8 @@ def loop(user, reddit, conf, banned):
 						cache = post(comment, links, cache)'''
 						
 					cache = post(reddit, comment, links, cache)
-						
+					
+			print('\n> Sleeping.')
 			time.sleep(15)
 			
 	except requests.exceptions.HTTPError:
@@ -220,7 +224,6 @@ def post(reddit, comment, links, cache):
 			)
 			
 			replied.edit(reply)
-			
 			print('> Comment posted! Fixed links: %s' % fixed)
 			
 			if not denied_links == '':
