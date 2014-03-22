@@ -19,7 +19,7 @@ sub_regex = re.compile(' r/[A-Za-z0-9_]+')
 
 def bootup():
 	
-	version = "1.2.1"
+	version = "1.3"
 	
 	parse = argparse.ArgumentParser(description = 'LinkFixerBot')
 	parse.add_argument('-l', '--login', action = 'store_true', help = 'Login to a different account than config account')
@@ -108,10 +108,20 @@ def loop(user, reddit, conf, banned):
 							comment.delete()
 							
 							print('\n> Comment removed!')
+							message.reply(
+								'Congratulations! **The comment you specified, located [here](' + comment.permalink + '?context=1), has been deleted!** Thank you for using LinkFixerBot services.\n\n'
+								'*****\n'
+								'[^source ^code](http://github.com/WinneonSword/LFB) ^| [^subreddit](http://reddit.com/r/LinkFixerBotSnr)'
+							)
 							
 						else:
 							
 							print('> Comment is not valid!')
+							message.reply(
+								'I am deeply sorry, but you **cannot remove the comment, located [here](' + comment.permalink + '?context=1)**! This may be because you are not the parent commenter of the comment specified in your message.\n\n'
+								'*****\n'
+								'[^mistake?](http://www.reddit.com/message/compose?to=WinneonSword&subject=Deletion%20Mistake&message=Replace+this+with+the+mistake+and+a+link+to+the+comment+that+needs+to+be+deleted.) ^| [^source ^code](http://github.com/WinneonSword/LFB) ^| [^subreddit](http://reddit.com/r/LinkFixerBotSnr)'
+							)
 							
 				except:
 					
@@ -148,11 +158,6 @@ def loop(user, reddit, conf, banned):
 			time.sleep(15)
 			
 	except KeyboardInterrupt:
-		
-		print('\n> Stopping LFB. Writing the banned subs list to the config.')
-		
-		current['banned'] = banned
-		config.write(current, config_name)
 		
 		print('> Stopped LFB. Thank you for running this bot!')
 		
