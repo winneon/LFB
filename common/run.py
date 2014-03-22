@@ -19,7 +19,7 @@ sub_regex = re.compile(' r/[A-Za-z0-9_]+')
 
 def bootup():
 	
-	version = "1.2"
+	version = "1.2.1"
 	
 	parse = argparse.ArgumentParser(description = 'LinkFixerBot')
 	parse.add_argument('-l', '--login', action = 'store_true', help = 'Login to a different account than config account')
@@ -214,8 +214,7 @@ def post(reddit, comment, links, cache):
 			reply = (
 				fixed + '\n\n'
 				'*****\n'
-				'^This ^is ^an [^automated ^bot](http://github.com/WinneonSword/LFB)^. ^For ^reporting ^**problems**, ^contact ^/u/WinneonSword.\n\n'
-				'^The ^parent ^commenter ^may [^remove](http://www.np.reddit.com/message/compose?to=LinkFixerBotSnr&subject=Comment%20Deletion&message=%2Bdelete+' + replied.id + ') ^this ^comment ^if ^they ^wish.'
+				'[^report ^a ^**problem**](http://reddit.com/r/LinkFixerBotSnr) ^| [^delete ^comment](http://www.reddit.com/message/compose?to=LinkFixerBotSnr&subject=Comment%20Deletion%20%28Parent%20Commenter%20Only%29&message=%2Bdelete+' + replied.id + ') ^| [^source ^code](http://github.com/WinneonSword/LFB) ^| [^contact ^developer](http://reddit.com/user/WinneonSword)'
 			)
 			
 			replied.edit(reply)
