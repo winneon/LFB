@@ -147,11 +147,6 @@ def loop(user, reddit, conf, banned):
 			print('\n> Sleeping.')
 			time.sleep(15)
 			
-	except requests.exceptions.HTTPError:
-		
-		print('\n> An HTTP Error has occured. Restarting the bot.')
-		bootup()
-		
 	except KeyboardInterrupt:
 		
 		print('\n> Stopping LFB. Writing the banned subs list to the config.')
