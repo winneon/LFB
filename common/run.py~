@@ -150,7 +150,7 @@ def loop(user, reddit, conf, banned):
 	except requests.exceptions.HTTPError:
 		
 		print('\n> An HTTP Error has occured. Restarting the bot.')
-		loop(user, reddit, config, banned)
+		loop(reddit, config, banned)
 		
 	except KeyboardInterrupt:
 		
